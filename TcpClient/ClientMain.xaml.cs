@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-namespace TcpClient
+using System.Net;
+using System.Net.Sockets;
+namespace MyTcpClient
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -27,8 +28,21 @@ namespace TcpClient
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            Label1.Content = textBox1.Text;
-
+            
+            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            int myPort = 11000;
+            int serverPort = 10000;
+            IPEndPoint myEndPoint = new IPEndPoint(ip, myPort);
+            IPEndPoint serverEndPoint = new IPEndPoint(ip, serverPort);
+            TcpClient client = new TcpClient(myEndPoint);
+            client.Connect(serverEndPoint);
+            byte[] bytes = new byte[client.ReceiveBufferSize];
+            int bytesRead = client.GetStream().Read(bytes, 0, client.ReceiveBufferSize);
+            byte[] bytesRecieved = new byte[bytesRead];
+            bytesRecieved = bytes;
+            string message = Encoding.UTF8.GetString(bytesRecieved);
+            Label1.Content = message;
+            client.Close();
         }
     }
 }

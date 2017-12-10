@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TcpClient.Properties
+namespace MyTcpClient.Properties
 {
 
 
