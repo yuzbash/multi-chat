@@ -12,18 +12,20 @@ namespace TcpServer
 {
     class Server
     {
+
         //oblect for tcp clients
-        TcpListener tcpListener;
-         
+        private TcpListener _tcpListener;
+
+        
         public Server(IPAddress iPAddress)
         {
             int port = 10000;
             //create listener
-            tcpListener = new TcpListener(iPAddress, port);
-            tcpListener.Start();
+            _tcpListener = new TcpListener(iPAddress, port);
+            _tcpListener.Start();
             while(true)
             {
-                TcpClient client = tcpListener.AcceptTcpClient();
+                TcpClient client = _tcpListener.AcceptTcpClient();
                 //create thread
                 Thread thread = new Thread(new ParameterizedThreadStart(ClientThread));
                 //start thread
@@ -38,10 +40,10 @@ namespace TcpServer
         ~Server()
         {
             //if listener was created
-            if (tcpListener != null)
+            if (_tcpListener != null)
             {
                 //stop him
-                tcpListener.Stop();
+                _tcpListener.Stop();
             }
         }
     }

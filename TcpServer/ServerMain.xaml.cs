@@ -37,7 +37,6 @@ namespace TcpServer
             IPAddress ip = IPAddress.Parse("127.0.0.1");
             Thread thread = new Thread(new ParameterizedThreadStart(ServerThread));
             thread.Start(ip);
-
         }
     }
 }
