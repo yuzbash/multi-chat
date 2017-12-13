@@ -28,20 +28,13 @@ namespace MyTcpClient
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            int myPort = 11000;
-            int serverPort = 10000;
-            IPEndPoint myEndPoint = new IPEndPoint(ip, myPort);
-            IPEndPoint serverEndPoint = new IPEndPoint(ip, serverPort);
-            TcpClient client = new TcpClient(myEndPoint);
-            client.Connect(serverEndPoint);
-            byte[] bytes = new byte[client.ReceiveBufferSize];
-            int bytesRead = client.GetStream().Read(bytes, 0, client.ReceiveBufferSize);
-            byte[] bytesRecieved = new byte[bytesRead];
-            bytesRecieved = bytes;
-            string message = Encoding.UTF8.GetString(bytesRecieved);
-            Label1.Content = message;
+
+            Client client = new Client(10000, this);
+            if (client.Connect())
+            {
+                client.SendMessage(textBox1.Text);
+                Label1.Content = client.RecieveMessage();
+            }
             client.Close();
         }
     }
