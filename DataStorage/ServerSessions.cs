@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
+namespace DataStorage
+{
+    //class for storing server sesseions and there dates
+    public class ServerSessions
+    {
+        //session id
+        [Key]
+        public int SessionID { get; set; }
+        //date of the session beggining
+        [Required]
+        public DateTime BeginningDate { get; set; }
+    }
+}
