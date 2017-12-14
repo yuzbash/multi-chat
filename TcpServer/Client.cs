@@ -15,10 +15,25 @@ namespace TcpServer
             if (_clientList == null)
                 _clientList = new List<TcpClient>();
             _clientList.Add(client);
-            string message = "hello\n";
-            byte[] buffer = Encoding.ASCII.GetBytes(message);
-            client.GetStream().Write(buffer, 0, buffer.Length);
+            string message = WaitMessage(client);
+            SendToAll(message);
             //client.Close();                
+        }
+        private string WaitMessage(TcpClient client)
+        {
+            byte[] bytes = new byte[client.ReceiveBufferSize];
+            int bytesRead = client.GetStream().Read(bytes, 0, client.ReceiveBufferSize);
+            byte[] bytesRecieved = new byte[bytesRead];
+            string message = Encoding.UTF8.GetString(bytesRecieved).Substring(0, bytesRead);
+            return message;
+        }
+        private void SendToAll(string message)
+        {
+            foreach (var client in _clientList)
+            {
+                byte[] buffer = Encoding.ASCII.GetBytes(message);
+                client.GetStream().Write(buffer, 0, buffer.Length);
+            }
         }
     }
 }
