@@ -21,7 +21,12 @@ namespace MyTcpClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        Client _client;
         public MainWindow()
+        {
+            InitializeComponent();
+        }
+        public MainWindow(Client client)
         {
             InitializeComponent();
         }

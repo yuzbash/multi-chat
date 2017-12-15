@@ -8,7 +8,7 @@ using System.Net.Sockets;
 
 namespace MyTcpClient
 {
-    class Client
+    public class Client
     {
         static int _clientPort;
         private int _serverPort;
