@@ -59,17 +59,15 @@ namespace TcpServer
         }
         ~MainWindow()
         {
-            if (_serverThread.IsAlive)
-            {
-                _serverThread.Abort();
-            }
-            _server.StopServer();
+            if(_server != null)
+                _server.StopServer();
+            Environment.Exit(0);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
-            _server.StopServer();
+            if(_server != null)
+                _server.StopServer();
             Environment.Exit(0);
         }
     }
