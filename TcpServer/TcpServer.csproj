@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Client.cs" />
+    <Compile Include="DatabaseWorker.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerMain.xaml.cs">
       <DependentUpon>ServerMain.xaml</DependentUpon>

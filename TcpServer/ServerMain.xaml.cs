@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Threading;
-using DataStorage;
+
 
 
 namespace TcpServer
@@ -26,14 +26,12 @@ namespace TcpServer
     {
         private Server _server;
         private Thread _serverThread;
-        private DataContext _context;
+        private DateTime _begginingSession;
+        
+        
         public MainWindow()
         {
-            InitializeComponent();
-            _context = new DataContext();
-            var users = from user in _context.Users select user;
-            //_context.InitializeUsers();
-            var a = users.ToList();
+            InitializeComponent();                    
         }
         
         private void ButtonServerOn_Click(object sender, RoutedEventArgs e)
@@ -54,7 +52,8 @@ namespace TcpServer
             {
                 _serverThread = new Thread(_server.StartWorking);
                 _serverThread.Start();
-                ButtonServerOn.IsEnabled = false;             
+                ButtonServerOn.IsEnabled = false;
+                _begginingSession = DateTime.Now;
             }
             catch
             {
@@ -63,18 +62,23 @@ namespace TcpServer
                 return;
             }
         }
+        private void EndServerWork()
+        {
+            if (_server != null)
+                _server.StopServer();
+            DateTime endingSession = DateTime.Now;
+            DatabaseWorker dw = new DatabaseWorker();
+            dw.SaveSession(_begginingSession, endingSession);
+            Environment.Exit(0);
+        }
         ~MainWindow()
         {
-            if(_server != null)
-                _server.StopServer();
-            Environment.Exit(0);
+            EndServerWork();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(_server != null)
-                _server.StopServer();
-            Environment.Exit(0);
+            EndServerWork();
         }
     }
 }
