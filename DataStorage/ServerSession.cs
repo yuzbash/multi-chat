@@ -17,7 +17,6 @@ namespace DataStorage
         [Required]
         public DateTime BeginningDate { get; set; }
         //date of the session beggining
-        [Required]
-        public DateTime EndingDate { get; set; }
+        public DateTime? EndingDate { get; set; }
     }
 }
