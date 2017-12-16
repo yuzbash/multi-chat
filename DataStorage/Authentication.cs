@@ -15,13 +15,13 @@ namespace DataStorage
         public int AuthenticationID { get; set; }
         //session id
         //reference to ServerSessions table
-        [ForeignKey("ServerSessions"), Required]
+        [ForeignKey("ServerSession"), Required]
         public int SessionID { get; set; }
         //user id of author
-        [ForeignKey("Users"), Required]
+        [ForeignKey("User"), Required]
         public int UserID { get; set; }
 
-        public virtual ServerSessions Session { get; set; }
-        public virtual Users Author { get; set; }
+        public virtual ServerSession ServerSession { get; set; }
+        public virtual User User { get; set; }
     }
 }

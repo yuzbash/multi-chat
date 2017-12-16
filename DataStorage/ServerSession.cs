@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace DataStorage
 {
     //class for storing server sesseions and there dates
-    public class ServerSessions
+    public class ServerSession
     {
         //session id
         [Key]

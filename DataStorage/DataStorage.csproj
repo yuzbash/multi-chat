@@ -49,10 +49,11 @@
   <ItemGroup>
     <Compile Include="Authentication.cs" />
     <Compile Include="DataContext.cs" />
-    <Compile Include="Messages.cs" />
+    <Compile Include="Initializer.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerSessions.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="ServerSession.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

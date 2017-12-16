@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace DataStorage
 {
     //class for storing users and there passwords
-    public class Users
+    public class User
     {
         //user id
         [Key]
@@ -19,8 +19,16 @@ namespace DataStorage
         //user password
         [Required]
         public string Password { get; set; }
-        //true if user is admibn
+        //user's surname
         [Required]
-        public bool IsAdmin { get; set; }
+        public string UserSurname { get; set; }
+        //user's passport name
+        [Required]
+        public string UserPassportName { get; set; }
+        //user's email
+        [Required]
+        public string UserEmail { get; set; }
+        //user's city
+        public string UserCity { get; set; }
     }
 }
