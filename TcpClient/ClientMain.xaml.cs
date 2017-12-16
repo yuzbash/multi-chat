@@ -61,9 +61,6 @@ namespace MyTcpClient
         {
             _client.SendMessage(TBmessage.Text);
         }
-        private void ListenServerEvent(object sender, RoutedEventArgs e)
-        {
-            _client.ListenServer(this);
-        }
+        
     }
 }

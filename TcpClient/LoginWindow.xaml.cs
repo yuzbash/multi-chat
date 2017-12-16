@@ -31,24 +31,44 @@ namespace MyTcpClient
             IPAddress serverIp;
             int serverPort;
             string userName;
+            string password;
             try
             {
                 serverIp = IPAddress.Parse(TbServerIP.Text);
                 serverPort = Int32.Parse(TbServerPort.Text);
                 userName = TbUserName.Text;
+                password = TbUserPassword.Text;
             }
             catch
             {
                 LabelLoginResult.Content = "Error with ip or port";
                 return;
             }
-            Client client = new Client(serverPort, serverIp, userName);
+            Client client;
+            try
+            {
+                client = new Client(serverPort, serverIp, userName);
+            }
+            catch
+            {
+                LabelLoginResult.Content = "Error with creating client";
+                return;
+            }
             
             if (client.Connect()) // and can login in future
             {
-                MainWindow window = new MainWindow(client);
-                window.Show();
-                this.Close();
+                client.SendMessage("ath:name:" + userName + ":" + "pswd:" + password);
+                string answer = client.RecieveMessage();
+                if (answer == "true")
+                {
+                    MainWindow window = new MainWindow(client);
+                    window.Show();
+                    this.Close();
+                }
+                else
+                {
+                    client.Close();
+                }
             }
             else
             {

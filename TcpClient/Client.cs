@@ -63,7 +63,8 @@ namespace MyTcpClient
             byte[] buffer = Encoding.ASCII.GetBytes(_userName + ":" + message);
             _client.GetStream().Write(buffer, 0, buffer.Length);
         }
-        public void ListenServer(object window)
+        
+        public string RecieveMessage()
         {
             byte[] bytes = new byte[_client.ReceiveBufferSize];
             int bytesRead = 0;
@@ -72,10 +73,7 @@ namespace MyTcpClient
                 bytesRead = _client.GetStream().Read(bytes, 0, _client.ReceiveBufferSize);
             }
             string message = Encoding.UTF8.GetString(bytes).Substring(0, bytesRead);
-            MainWindow wnd = (MainWindow)window;
-            
-            
-            wnd.TBchatBox.Text += message + "\n";
+            return message;
         }
         
         public void Close()
