@@ -37,8 +37,8 @@ namespace MyTcpClient
             Client client = new Client(10000, this);
             if (client.Connect())
             {
-                client.SendMessage(textBox1.Text);
-                Label1.Content = client.RecieveMessage();
+                client.SendMessage(TBmessage.Text);
+                TBchatBox.Text += client.RecieveMessage();
             }
             client.Close();
         }

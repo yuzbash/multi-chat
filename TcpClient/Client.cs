@@ -48,7 +48,7 @@ namespace MyTcpClient
             }
             catch
             {
-                _window.Label1.Content = "Ошибка подключения клиента";
+                //_window.Label1.Content = "Ошибка подключения клиента";
                 return false;
             }
             return true;
@@ -64,7 +64,7 @@ namespace MyTcpClient
             int bytesRead = _client.GetStream().Read(bytes, 0, _client.ReceiveBufferSize);
             byte[] bytesRecieved = new byte[bytesRead];
             string message = Encoding.UTF8.GetString(bytesRecieved).Substring(0, bytesRead);
-            _window.Label1.Content = message;
+            _window.TBchatBox.Text += message;
             return message;
         }
         public void Close()

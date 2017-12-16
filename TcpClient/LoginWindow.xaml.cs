@@ -36,8 +36,7 @@ namespace MyTcpClient
             }
             else
             {
-                LabelLoginResult.Content = "Error with connection";
-                
+                LabelLoginResult.Content = "Error with connection";                
             }
         }
     }
