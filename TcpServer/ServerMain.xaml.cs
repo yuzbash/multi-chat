@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Threading;
+using DataStorage;
 
 
 namespace TcpServer
@@ -25,9 +26,14 @@ namespace TcpServer
     {
         private Server _server;
         private Thread _serverThread;
+        private DataContext _context;
         public MainWindow()
         {
             InitializeComponent();
+            _context = new DataContext();
+            var users = from user in _context.Users select user;
+            //_context.InitializeUsers();
+            var a = users.ToList();
         }
         
         private void ButtonServerOn_Click(object sender, RoutedEventArgs e)

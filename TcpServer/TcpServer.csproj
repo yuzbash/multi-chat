@@ -103,5 +103,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataStorage\DataStorage.csproj">
+      <Project>{cbfdb4e4-70ef-4a6e-b15d-e7d0a4ea6a0a}</Project>
+      <Name>DataStorage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
