@@ -13,6 +13,6 @@ namespace TcpServer
     /// </summary>
     public partial class App : Application
     {
-
+        
     }
 }

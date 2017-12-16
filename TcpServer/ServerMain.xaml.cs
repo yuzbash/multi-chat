@@ -23,20 +23,54 @@ namespace TcpServer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Server _server;
+        private Thread _serverThread;
         public MainWindow()
         {
             InitializeComponent();
         }
-        static void ServerThread(Object StateInfo)
+        
+        private void ButtonServerOn_Click(object sender, RoutedEventArgs e)
         {
-            new Server((IPAddress)StateInfo);
+
+            try
+            {
+                IPAddress ip = IPAddress.Parse(TBserverIP.Text);
+                int port = Int32.Parse(TBserverPort.Text);
+                _server = new Server(ip, port);
+            }
+            catch
+            {
+                LbResult.Content = "Invalid ip or port";
+                return;
+            }
+            try
+            {
+                _serverThread = new Thread(_server.StartWorking);
+                _serverThread.Start();
+                ButtonServerOn.IsEnabled = false;             
+            }
+            catch
+            {
+                LbResult.Content = "Error with server running";
+                _server.StopServer();
+                return;
+            }
         }
-        private void btn1_Click(object sender, RoutedEventArgs e)
+        ~MainWindow()
         {
-            Label1.Content = textBox1.Text;
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            Thread thread = new Thread(new ParameterizedThreadStart(ServerThread));
-            thread.Start(ip);
+            if (_serverThread.IsAlive)
+            {
+                _serverThread.Abort();
+            }
+            _server.StopServer();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+            _server.StopServer();
+            Environment.Exit(0);
         }
     }
 }

@@ -5,14 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TcpServer"
         mc:Ignorable="d"
-        Title="Server" Height="350" Width="525">
+        Title="Server" Height="350" Width="525" Background="#FF7CA0FF" ResizeMode="CanResize"
+        Closing="MainWindow_Closing">
     <Grid>
-        <Label Name="Label1">
-            "Hello world"
-        </Label>
-        <TextBox Margin="46, 64,71 , 0" Height="20" Name="textBox1">
-        </TextBox>
-        <Button Name="btn1" Margin="46, 124, 71, 0" Height="20" Click="btn1_Click" Content="btn">
-        </Button>
+        <TabControl Background="#FF7CA0FF">
+            <TabItem Header="Server">
+                <StackPanel>
+                    <Label Name="LbServerIP" Margin="100,100,100,0" Height="40" Width="100" Content="Server IP" HorizontalAlignment="Center"></Label>
+                    <TextBox Margin="100, 0, 100, 0" Height="20" Width="100" Name="TBserverIP" Text="127.0.0.1" HorizontalAlignment="Center">
+                    </TextBox>
+                    <Label Name="LbServePort" Margin="100,0,100,0" Height="40" Width="100" Content="Server Port" HorizontalAlignment="Center"></Label>
+                    <TextBox Margin="100, 0, 100, 0" Height="20" Width="100" Name="TBserverPort" Text="10000" HorizontalAlignment="Center">
+                    </TextBox>
+                    <Button Name="ButtonServerOn" Margin="100, 10, 100, 0" Height="20" Width="100" Click="ButtonServerOn_Click" Content="Server On" HorizontalAlignment="Center">
+                    </Button>
+                    <Label Name="LbResult" Margin="100,0,100,0" Height="40" Width="100" Content="Server Port" HorizontalAlignment="Center">
+                    </Label>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

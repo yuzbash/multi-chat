@@ -15,15 +15,16 @@ namespace TcpServer
 
         //oblect for tcp clients
         private TcpListener _tcpListener;
-
-        
-        public Server(IPAddress iPAddress)
+                
+        public Server(IPAddress iPAddress, int port)
         {
-            int port = 10000;
             //create listener
-            _tcpListener = new TcpListener(iPAddress, port);
+            _tcpListener = new TcpListener(iPAddress, port);            
+        }
+        public void StartWorking()
+        {
             _tcpListener.Start();
-            while(true)
+            while (true)
             {
                 TcpClient client = _tcpListener.AcceptTcpClient();
                 //create thread
@@ -36,7 +37,15 @@ namespace TcpServer
         {
             new Client((TcpClient)StateInfo);
         }
-        
+        public void StopServer()
+        {
+            //if listener was created
+            if (_tcpListener != null)
+            {
+                //stop him
+                _tcpListener.Stop();
+            }
+        }
         ~Server()
         {
             //if listener was created
