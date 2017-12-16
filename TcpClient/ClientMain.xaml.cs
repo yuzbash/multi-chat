@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
+using System.ComponentModel;
+using System.Net;
+using System.Net.Sockets;
 namespace MyTcpClient
 {
     /// <summary>
@@ -22,25 +26,49 @@ namespace MyTcpClient
     public partial class MainWindow : Window
     {
         Client _client;
+        private readonly BackgroundWorker worker = new BackgroundWorker();
         public MainWindow()
         {
             InitializeComponent();
+            
         }
         public MainWindow(Client client)
         {
+            _client = client;
+            _client.SetWindow(this);
+            worker.DoWork += worker_DoWork;
+            
+            //Thread listenThread = new Thread(_client.ListenServer);
+            //listenThread.Start(this);
             InitializeComponent();
+            worker.RunWorkerAsync();
+
+        }
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            TcpClient client = _client.GetTcpClient();
+            byte[] bytes = new byte[client.ReceiveBufferSize];
+            int bytesRead = 0;
+            while (true)
+            {               
+                while (bytesRead == 0)
+                {
+                    bytesRead = client.GetStream().Read(bytes, 0, client.ReceiveBufferSize);
+                }
+                string message = Encoding.UTF8.GetString(bytes).Substring(0, bytesRead);
+                Application.Current.Dispatcher.Invoke(new Action(() => TBchatBox.Text += message + "\n"));
+                bytesRead = 0;
+            }
+            
         }
 
-        private void btn1_Click(object sender, RoutedEventArgs e)
+        private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-
-            Client client = new Client(10000, this);
-            if (client.Connect())
-            {
-                client.SendMessage(TBmessage.Text);
-                TBchatBox.Text += client.RecieveMessage();
-            }
-            client.Close();
+            _client.SendMessage(TBmessage.Text);
+        }
+        private void ListenServerEvent(object sender, RoutedEventArgs e)
+        {
+            _client.ListenServer(this);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows.Threading;
 
 namespace MyTcpClient
 {
@@ -14,13 +15,19 @@ namespace MyTcpClient
         private int _serverPort;
         private IPAddress _clientAddress = IPAddress.Parse("127.0.0.1");
         private IPAddress _serverAddress = IPAddress.Parse("127.0.0.1");
-        private MainWindow _window;
         private TcpClient _client;
-        public Client(int serverPort, MainWindow window)
+        MainWindow _window;
+        public Client(int serverPort)
         {
-            _serverPort = serverPort;
+            _serverPort = serverPort;             
+        }
+        public void SetWindow(MainWindow window)
+        {
             _window = window;
-            
+        }
+        public TcpClient GetTcpClient()
+        {
+            return _client;
         }
         public bool Connect()
         {
@@ -58,15 +65,21 @@ namespace MyTcpClient
             byte[] buffer = Encoding.ASCII.GetBytes(message);
             _client.GetStream().Write(buffer, 0, buffer.Length);
         }
-        public string RecieveMessage()
+        public void ListenServer(object window)
         {
             byte[] bytes = new byte[_client.ReceiveBufferSize];
-            int bytesRead = _client.GetStream().Read(bytes, 0, _client.ReceiveBufferSize);
-            byte[] bytesRecieved = new byte[bytesRead];
-            string message = Encoding.UTF8.GetString(bytesRecieved).Substring(0, bytesRead);
-            _window.TBchatBox.Text += message;
-            return message;
+            int bytesRead = 0;
+            while (bytesRead == 0)
+            {
+                bytesRead = _client.GetStream().Read(bytes, 0, _client.ReceiveBufferSize);
+            }
+            string message = Encoding.UTF8.GetString(bytes).Substring(0, bytesRead);
+            MainWindow wnd = (MainWindow)window;
+            //Dispatcher.CurrentDispatcher.Invoke(new Action(() => wnd.TBchatBox.Text += message + "\n"));
+            
+            wnd.TBchatBox.Text += message + "\n";
         }
+        
         public void Close()
         {
             _client.Close();

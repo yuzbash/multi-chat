@@ -26,11 +26,11 @@ namespace MyTcpClient
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
-
-            Client client = new Client(10000, window);
+            Client client = new Client(10000);//change constructor later
+            
             if (client.Connect()) // and can login in future
             {
+                MainWindow window = new MainWindow(client);
                 window.Show();
                 this.Close();
             }

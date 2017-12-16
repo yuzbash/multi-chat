@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTcpClient"
         mc:Ignorable="d"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
         Title="Client" Height="350" Width="525" Background="#FF7CA0FF" ResizeMode="CanResize">
     <Grid>
         <Label Margin="11, 10, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Messages:"></Label>
@@ -13,10 +14,14 @@
         <TextBox Height="231" HorizontalAlignment="Right" Margin="351,38,0,0" Name="TBmessagesFrom" VerticalAlignment="Top" Width="150" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
         <Label Margin="11, 265, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Message:"></Label>
         <TextBox Margin="11, 280, 0, 0" Height="20" Width="330" Name="TBmessage" HorizontalAlignment="Left"></TextBox>
-        <Button Margin="351, 280, 0,0" Height="20" Width="150" Name="BtnSend" HorizontalAlignment="Right" Content="Send">
+        <Button Margin="351, 280, 0,0" Height="20" Width="150" Name="BtnSend" HorizontalAlignment="Right" Content="Send" Click="BtnSend_Click">
         </Button>
 
 
 
     </Grid>
+    <Window.Resources>
+        <cm:BackgroundWorker x:Key="worker" DoWork="worker_DoWork">
+        </cm:BackgroundWorker>
+    </Window.Resources>
 </Window>
