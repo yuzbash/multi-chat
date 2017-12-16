@@ -11,20 +11,18 @@ namespace MyTcpClient
 {
     public class Client
     {
-        static int _clientPort;
+        private string _userName;
         private int _serverPort;
         private IPAddress _clientAddress = IPAddress.Parse("127.0.0.1");
-        private IPAddress _serverAddress = IPAddress.Parse("127.0.0.1");
-        private TcpClient _client;
-        MainWindow _window;
-        public Client(int serverPort)
+        private IPAddress _serverAddress;
+        private TcpClient _client;       
+        public Client(int serverPort, IPAddress serverIP, string userName)
         {
-            _serverPort = serverPort;             
+            _serverPort = serverPort;
+            _serverAddress = serverIP;
+            _userName = userName;
         }
-        public void SetWindow(MainWindow window)
-        {
-            _window = window;
-        }
+        
         public TcpClient GetTcpClient()
         {
             return _client;
@@ -62,7 +60,7 @@ namespace MyTcpClient
         }
         public void SendMessage(string message)
         {
-            byte[] buffer = Encoding.ASCII.GetBytes(message);
+            byte[] buffer = Encoding.ASCII.GetBytes(_userName + ":" + message);
             _client.GetStream().Write(buffer, 0, buffer.Length);
         }
         public void ListenServer(object window)
@@ -75,7 +73,7 @@ namespace MyTcpClient
             }
             string message = Encoding.UTF8.GetString(bytes).Substring(0, bytesRead);
             MainWindow wnd = (MainWindow)window;
-            //Dispatcher.CurrentDispatcher.Invoke(new Action(() => wnd.TBchatBox.Text += message + "\n"));
+            
             
             wnd.TBchatBox.Text += message + "\n";
         }

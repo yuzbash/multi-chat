@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Sockets;
 
 namespace MyTcpClient
 {
@@ -26,7 +28,21 @@ namespace MyTcpClient
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            Client client = new Client(10000);//change constructor later
+            IPAddress serverIp;
+            int serverPort;
+            string userName;
+            try
+            {
+                serverIp = IPAddress.Parse(TbServerIP.Text);
+                serverPort = Int32.Parse(TbServerPort.Text);
+                userName = TbUserName.Text;
+            }
+            catch
+            {
+                LabelLoginResult.Content = "Error with ip or port";
+                return;
+            }
+            Client client = new Client(serverPort, serverIp, userName);
             
             if (client.Connect()) // and can login in future
             {
@@ -36,6 +52,7 @@ namespace MyTcpClient
             }
             else
             {
+                client.Close();
                 LabelLoginResult.Content = "Error with connection";                
             }
         }

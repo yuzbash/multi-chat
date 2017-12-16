@@ -35,14 +35,9 @@ namespace MyTcpClient
         public MainWindow(Client client)
         {
             _client = client;
-            _client.SetWindow(this);
             worker.DoWork += worker_DoWork;
-            
-            //Thread listenThread = new Thread(_client.ListenServer);
-            //listenThread.Start(this);
             InitializeComponent();
             worker.RunWorkerAsync();
-
         }
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
