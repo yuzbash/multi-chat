@@ -53,7 +53,7 @@ namespace TcpServer
                 _serverThread = new Thread(_server.StartWorking);
                 _serverThread.Start();
                 ButtonServerOn.IsEnabled = false;
-                _begginingSession = DateTime.Now;
+                
             }
             catch
             {
@@ -61,14 +61,17 @@ namespace TcpServer
                 _server.StopServer();
                 return;
             }
+            DatabaseWorker dw = new DatabaseWorker();
+            dw.SaveSession();
         }
         private void EndServerWork()
         {
             if (_server != null)
+            {
                 _server.StopServer();
-            DateTime endingSession = DateTime.Now;
-            DatabaseWorker dw = new DatabaseWorker();
-            dw.SaveSession(_begginingSession, endingSession);
+                DatabaseWorker dw = new DatabaseWorker();
+                dw.SaveSessionEnd();
+            }
             Environment.Exit(0);
         }
         ~MainWindow()
