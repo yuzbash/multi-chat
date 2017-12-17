@@ -11,25 +11,29 @@
         <TabControl Background="#FF7CA0FF">
             <TabItem Header="Server">
                 <StackPanel>
-                    <Label Name="LbServerIP" Margin="100,100,100,0" Height="40" Width="100" Content="Server IP" HorizontalAlignment="Center"></Label>
-                    <TextBox Margin="100, 0, 100, 0" Height="20" Width="100" Name="TBserverIP" Text="127.0.0.1" HorizontalAlignment="Center">
+                    <Label Name="LbServerIP" Margin="100,50,100,0" Height="30" Width="100" Content="Server IP" HorizontalAlignment="Center"></Label>
+                    <TextBox Margin="0, 0, 0, 0" Height="20" Width="100" Name="TBserverIP" Text="127.0.0.1" HorizontalAlignment="Center">
                     </TextBox>
-                    <Label Name="LbServePort" Margin="100,0,100,0" Height="40" Width="100" Content="Server Port" HorizontalAlignment="Center"></Label>
-                    <TextBox Margin="100, 0, 100, 0" Height="20" Width="100" Name="TBserverPort" Text="10000" HorizontalAlignment="Center">
+                    <Label Name="LbServePort" Margin="0,0,0,0" Height="30" Width="100" Content="Server Port" HorizontalAlignment="Center"></Label>
+                    <TextBox Margin="0, 0, 0, 0" Height="20" Width="100" Name="TBserverPort" Text="10000" HorizontalAlignment="Center">
                     </TextBox>
-                    <Button Name="ButtonServerOn" Margin="100, 10, 100, 0" Height="20" Width="100" Click="ButtonServerOn_Click" Content="Server On" HorizontalAlignment="Center">
+                    <Button Name="ButtonServerOn" Margin="0, 10, 0, 0" Height="20" Width="100" Click="ButtonServerOn_Click" Content="Server On" HorizontalAlignment="Center">
                     </Button>
-                    <Label Name="LbResult" Margin="100,0,100,0" Height="40" Width="100" Content="Server Port" HorizontalAlignment="Center">
+                    <Button Name="ButtonServerOff" IsEnabled="False" Margin="0, 10, 0, 0" Height="20" Width="100" Click="ButtonServerOff_Click" Content="Stop server" HorizontalAlignment="Center">
+                    </Button>
+                    <Label Name="LbResult" Margin="0,0,0,0" Height="30" Width="100" Content="" HorizontalAlignment="Center">
                     </Label>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Database Info">
-                <StackPanel>
-                    <DataGrid x:Name="databaseInfo" Margin="10, 10, 100, 10" AutoGenerateColumns="True"></DataGrid>
-                    <Button Name="ButtonShowSession" Content="Show sessions" Margin="0, 0, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowSession_Click"></Button>
-                    <Button Name="ButtonShowMessages" Content="Show messages" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowMessages_Click"></Button>
-                    <Button Name="ButtonShowUsers" Content="Show users" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowUsers_Click"></Button>
-                    <Button Name="ButtonShowAuthentication" Content="Authentications" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowAuthentication_Click"></Button>
+                <StackPanel Orientation="Horizontal">
+                    <DataGrid x:Name="databaseInfo" Margin="10, 10, 10, 10" IsReadOnly="True" AutoGenerateColumns="True" HorizontalAlignment="Left"></DataGrid>
+                    <StackPanel HorizontalAlignment="Right">
+                        <Button Name="ButtonShowSession" Content="Show sessions" Margin="0, 10, 0, 0"  Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowSession_Click"></Button>
+                        <Button Name="ButtonShowMessages" Content="Show messages" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowMessages_Click"></Button>
+                        <Button Name="ButtonShowUsers" Content="Show users" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowUsers_Click"></Button>
+                        <Button Name="ButtonShowAuthentication" Content="Authentications" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonShowAuthentication_Click"></Button>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>
