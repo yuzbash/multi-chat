@@ -60,14 +60,15 @@ namespace MyTcpClient
                 return;
             }
             string resString = "reg:" + 
-                "user:" + TBuserNameReg.Text +
-                "pswd:" + TBpasswordReg + 
-                "srnm:" + TBsurnameReg.Text+
-                "pasp:" + TBpassportNameReg.Text +
-                "emal:" + TBemailReg.Text +
+                "user:" + TBuserNameReg.Text + ":" +
+                "pswd:" + TBpasswordReg.Text + ":" +
+                "srnm:" + TBsurnameReg.Text+ ":" +
+                "pasp:" + TBpassportNameReg.Text + ":" +
+                "emal:" + TBemailReg.Text + ":" +
                 "city:" + TBcityReg.Text;
             ResultString = resString;
             IsOk = true;
+            this.Close();
         }
     }
 }

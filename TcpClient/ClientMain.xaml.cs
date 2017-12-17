@@ -45,21 +45,38 @@ namespace MyTcpClient
             byte[] bytes = new byte[client.ReceiveBufferSize];
             int bytesRead = 0;
             while (true)
-            {               
-                while (bytesRead == 0)
+            {
+                try
                 {
-                    bytesRead = client.GetStream().Read(bytes, 0, client.ReceiveBufferSize);
+                    while (bytesRead == 0)
+                    {
+                        bytesRead = client.GetStream().Read(bytes, 0, client.ReceiveBufferSize);
+                    }
+                    string message = Encoding.UTF8.GetString(bytes).Substring(0, bytesRead);
+                    Application.Current.Dispatcher.Invoke(new Action(() => TBchatBox.Text += message + "\n"));
+                    bytesRead = 0;
                 }
-                string message = Encoding.UTF8.GetString(bytes).Substring(0, bytesRead);
-                Application.Current.Dispatcher.Invoke(new Action(() => TBchatBox.Text += message + "\n"));
-                bytesRead = 0;
+                catch
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                                                ResultLabelMain.Content =
+                                                "Error with server. Try to restart tour client"));
+                    break;
+                }
             }
             
         }
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-            _client.SendMessage(TBmessage.Text);
+            try
+            {
+                _client.SendMessage(TBmessage.Text);
+            }
+            catch
+            {
+                ResultLabelMain.Content = "Error with server. Try to restart your client";
+            }
         }
         
     }

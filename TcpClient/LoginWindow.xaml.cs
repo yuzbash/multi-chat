@@ -125,7 +125,7 @@ namespace MyTcpClient
                         string answer = client.RecieveMessage();
                         if (answer == "true")
                         {
-
+                            LabelLoginResult.Content = "Succesfull registration";
                         }
                         else
                         {

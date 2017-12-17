@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyTcpClient"
         mc:Ignorable="d"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
-        Title="Client" Height="350" Width="525" Background="#FF7CA0FF" ResizeMode="CanResize">
+        Title="Client" Height="390" Width="525" Background="#FF7CA0FF" ResizeMode="CanResize">
     <Grid>
         <Label Margin="11, 10, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Messages:"></Label>
         <Label Margin="351, 10, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Now in chat:"></Label>
@@ -16,6 +16,8 @@
         <TextBox Margin="11, 280, 0, 0" Height="20" Width="330" Name="TBmessage" HorizontalAlignment="Left"></TextBox>
         <Button Margin="351, 280, 0,0" Height="20" Width="150" Name="BtnSend" HorizontalAlignment="Right" Content="Send" Click="BtnSend_Click">
         </Button>
+        <Label Name="ResultLabelMain" Margin="11, 300, 0, 0" Content="" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+        </Label>
 
 
 
