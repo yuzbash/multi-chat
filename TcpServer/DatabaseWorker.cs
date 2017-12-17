@@ -21,7 +21,7 @@ namespace TcpServer
         {
             _context.ServerSessions.Add(new ServerSession
             {
-                BeginningDate = DateTime.UtcNow.Date
+                BeginningDate = DateTime.UtcNow
             });
             _context.SaveChanges();
         }
@@ -108,6 +108,22 @@ namespace TcpServer
                 UserCity = userCity
             });
             _context.SaveChanges();
+        }
+        public List<ServerSession> GetSessions()
+        {
+            return _context.ServerSessions.ToList();
+        }
+        public List<Message> GetMessages()
+        {
+            return _context.Messages.ToList();
+        }
+        public List<User> GetUsers()
+        {
+            return _context.Users.ToList();
+        }
+        public List<Authentication> GetAuthentications()
+        {
+            return _context.Authentications.ToList();
         }
     }
 }

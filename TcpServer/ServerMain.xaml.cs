@@ -83,5 +83,29 @@ namespace TcpServer
         {
             EndServerWork();
         }
+
+        private void ButtonShowSession_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseWorker dw = new DatabaseWorker();
+            databaseInfo.ItemsSource = dw.GetSessions();
+        }
+
+        private void ButtonShowMessages_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseWorker dw = new DatabaseWorker();
+            databaseInfo.ItemsSource = dw.GetMessages();
+        }
+
+        private void ButtonShowUsers_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseWorker dw = new DatabaseWorker();
+            databaseInfo.ItemsSource = dw.GetUsers();
+        }
+
+        private void ButtonShowAuthentication_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseWorker dw = new DatabaseWorker();
+            databaseInfo.ItemsSource = dw.GetAuthentications();
+        }
     }
 }
