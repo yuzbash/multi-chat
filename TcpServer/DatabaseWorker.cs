@@ -178,7 +178,7 @@ namespace TcpServer
         //get users from database
         public List<User> GetUsers()
         {
-            _context.InitializeUsers(); 
+            //_context.InitializeUsers(); 
             return _context.Users.ToList();
         }
         //get authentications ffrom database
