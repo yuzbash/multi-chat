@@ -14,21 +14,22 @@ using System.Windows.Shapes;
 
 namespace MyTcpClient
 {
-    /// <summary>
-    /// Логика взаимодействия для Registration.xaml
-    /// </summary>
+    //window for registration procedure
     public partial class Registration : Window
     {
+        //if user press "registrate" button
         public bool IsOk{get; set;}
         public string ResultString { get; set; }
         public Registration()
         {
             InitializeComponent();
+            //change IsOk to false
             IsOk = false;
         }
 
         private void ButtonRegistration_Click(object sender, RoutedEventArgs e)
         {
+            //check all textboxes
             if (TBuserNameReg.Text == "")
             {
                 LabelResultReg.Content = "Please, enter user name";
@@ -59,6 +60,7 @@ namespace MyTcpClient
                 LabelResultReg.Content = "Please, enter city";
                 return;
             }
+            //if all textboxes filled return result string
             string resString = "reg:" + 
                 "user:" + TBuserNameReg.Text + ":" +
                 "pswd:" + TBpasswordReg.Text + ":" +
@@ -66,7 +68,9 @@ namespace MyTcpClient
                 "pasp:" + TBpassportNameReg.Text + ":" +
                 "emal:" + TBemailReg.Text + ":" +
                 "city:" + TBcityReg.Text;
+            
             ResultString = resString;
+            //change IsOk to true
             IsOk = true;
             this.Close();
         }

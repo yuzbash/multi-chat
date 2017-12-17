@@ -9,9 +9,9 @@
         Title="Client" Height="390" Width="525" Background="#FF7CA0FF" ResizeMode="CanResize">
     <Grid>
         <Label Margin="11, 10, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Messages:"></Label>
-        <Label Margin="351, 10, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Now in chat:"></Label>
-        <TextBox Height="231" HorizontalAlignment="Left" Margin="11,38,0,0" Name="TBchatBox" VerticalAlignment="Top" Width="330" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
-        <TextBox Height="231" HorizontalAlignment="Right" Margin="351,38,0,0" Name="TBmessagesFrom" VerticalAlignment="Top" Width="150" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
+       
+        <TextBox Height="231" HorizontalAlignment="Left" Margin="11,38,0,0" Name="TBchatBox" VerticalAlignment="Top" Width="500" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
+        
         <Label Margin="11, 265, 0, 0" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Message:"></Label>
         <TextBox Margin="11, 280, 0, 0" Height="20" Width="330" Name="TBmessage" HorizontalAlignment="Left"></TextBox>
         <Button Margin="351, 280, 0,0" Height="20" Width="150" Name="BtnSend" HorizontalAlignment="Right" Content="Send" Click="BtnSend_Click">
