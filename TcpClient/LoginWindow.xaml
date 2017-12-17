@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTcpClient"
         mc:Ignorable="d"
-        Title="Login" Height="350" Width="300" Background="#FF7CA0FF" ResizeMode="NoResize">
+        Title="Login" Height="380" Width="300" Background="#FF7CA0FF" ResizeMode="NoResize">
     <Grid>
         <Label Content="Server IP:" Height="28" HorizontalAlignment="Center" Margin="0,30, 0,0" Name="LabelServerIP" VerticalAlignment="Top" />
         <TextBox Text="127.0.0.1" Height="23" HorizontalAlignment="Center" Margin="0,50,0,0" Name="TbServerIP" VerticalAlignment="Top" Width="120" />
@@ -15,8 +15,11 @@
         <TextBox Text="user" Height="23" HorizontalAlignment="Center" Margin="0,150,0,0" Name="TbUserName" VerticalAlignment="Top" Width="120" />
         <Label Content="Password:" Height="28" HorizontalAlignment="Center" Margin="0,180, 0,0" Name="LabelUserPassword" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Center" Margin="0,200,0,0" Name="TbUserPassword" VerticalAlignment="Top" Width="120" />
-        <Button Name="ButtonLogin" HorizontalAlignment="Center"  Margin="0, 230, 0, 0" Height="28" Content="Login" Width="120" Click="ButtonLogin_Click">
+        
+        <Button Name="ButtonLogin" HorizontalAlignment="Center"  Margin="0, 210, 0, 0" Height="28" Content="Login" Width="120" Click="ButtonLogin_Click">
         </Button>
-        <Label Content="" Height="28" HorizontalAlignment="Center" Margin="0,290, 0,0" Name="LabelLoginResult" VerticalAlignment="Top" />
+        <Button Name="ButtonRegistration" HorizontalAlignment="Center"  Margin="0, 270, 0, 0" Height="28" Content="Registration" Width="120" Click="ButtonRegistration_Click">
+        </Button>
+        <Label Content="" Height="28" HorizontalAlignment="Center" Margin="0,320, 0,0" Name="LabelLoginResult" VerticalAlignment="Top" />
     </Grid>
 </Window>

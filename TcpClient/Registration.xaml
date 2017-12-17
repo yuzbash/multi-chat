@@ -1,0 +1,41 @@
+﻿<Window x:Class="MyTcpClient.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyTcpClient"
+        mc:Ignorable="d"
+        Title="Registration"  Height="450" Width="300" Background="#FF7CA0FF" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel>
+            <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="User name:">
+            </Label>
+            <TextBox Name="TBuserNameReg" Width="150" HorizontalAlignment="Center">
+            </TextBox>
+            <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="Password:">
+            </Label>
+            <TextBox Name="TBpasswordReg" Width="150" HorizontalAlignment="Center">
+            </TextBox>
+            <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="Surname:">
+            </Label>
+            <TextBox Name="TBsurnameReg" Width="150" HorizontalAlignment="Center">
+            </TextBox>
+            <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="Passport name:">
+            </Label>
+            <TextBox Name="TBpassportNameReg" Width="150" HorizontalAlignment="Center">
+            </TextBox>
+            <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="Email:">
+            </Label>
+            <TextBox Name="TBemailReg" Width="150" HorizontalAlignment="Center">
+            </TextBox>
+            <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="City:">
+            </Label>
+            <TextBox Name="TBcityReg" Width="150" HorizontalAlignment="Center">
+            </TextBox>
+            <Button Name="ButtonRegistration" Content="Registrate"  Margin="0,10,0,0" Width="150" Height="28" HorizontalAlignment="Center" Click="ButtonRegistration_Click">
+            </Button>
+            <Label Content="13123" Name="LabelResultReg" HorizontalAlignment="Center">
+            </Label>
+        </StackPanel>
+    </Grid>
+</Window>
