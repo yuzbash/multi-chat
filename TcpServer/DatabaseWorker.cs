@@ -40,8 +40,9 @@ namespace TcpServer
             currentSession.EndingDate = DateTime.UtcNow;
             _context.SaveChanges();
         }
-        public void SaveMessage(string text, string userName, int sessionID)
+        public void SaveMessage(string text, string userName)
         {
+            int sessionID = GetCurrentSessionID();
             User usr = (from user in _context.Users
                         where user.UserName == userName
                         select user).ToList()[0];
@@ -56,6 +57,7 @@ namespace TcpServer
                 User = usr,
                 ServerSession = ss                
             });
+            _context.SaveChanges();
         }
         public bool CheckUserPassword(string userName, string password)
         {

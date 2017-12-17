@@ -16,11 +16,16 @@ namespace TcpServer
             if (_clientList == null)
                 _clientList = new List<TcpClient>();
             _clientList.Add(client);
+            DatabaseWorker dw = new DatabaseWorker();
             while (true)
             {
                 string message = WaitMessage(client);
                 if (ShowRecieveOperation(message) == "msg:")
                 {
+                    string text;
+                    string user;
+                    ParseMessage(message,out text,out user);
+                    dw.SaveMessage(text, user);
                     SendToAll(message.Substring(_codeLength, message.Length - _codeLength));
                 }
                 else if(ShowRecieveOperation(message) == "ath:")
@@ -30,11 +35,11 @@ namespace TcpServer
                     ParseAuthenticationMessage(message, out userName, out password);
                     if (userName != "" && password != "")
                     {
-                        DatabaseWorker dw = new DatabaseWorker();
                         bool result = dw.CheckUserPassword(userName, password);
                         if (result)
                         {
                             SendToOne("true", client);
+                            dw.AddAuthentication(userName);
                         }
                         else
                         {
@@ -154,6 +159,17 @@ namespace TcpServer
                 {
                     password = parseString[i + 1];
                 }
+            }
+        }
+        private void ParseMessage(string recieveMessage, out string text, out string userName)
+        {
+            text = "";
+            userName = "";
+            string[] parseString = recieveMessage.Split(':');
+            userName = parseString[1];
+            for (int i = 2; i < parseString.Length; i++)
+            {
+                text += parseString[i];
             }
         }
     }
