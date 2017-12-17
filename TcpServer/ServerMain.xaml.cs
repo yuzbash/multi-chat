@@ -26,7 +26,7 @@ namespace TcpServer
     {
         private Server _server;
         private Thread _serverThread;
-        private DateTime _begginingSession;
+        
         
         
         public MainWindow()

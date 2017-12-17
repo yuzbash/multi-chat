@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataStorage;
+using System.Data.SqlTypes;
 
 namespace TcpServer
 {
@@ -20,7 +21,7 @@ namespace TcpServer
         {
             _context.ServerSessions.Add(new ServerSession
             {
-                BeginningDate = DateTime.Now
+                BeginningDate = DateTime.UtcNow.Date
             });
             _context.SaveChanges();
         }
@@ -36,7 +37,7 @@ namespace TcpServer
             List<ServerSession> sessions = _context.ServerSessions.ToList();
             int sessionsSize = sessions.Count;
             var currentSession = sessions[sessionsSize - 1];
-            currentSession.EndingDate = DateTime.Now;
+            currentSession.EndingDate = DateTime.UtcNow;
             _context.SaveChanges();
         }
         public void SaveMessage(string text, string userName, int sessionID)

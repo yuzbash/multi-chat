@@ -10,6 +10,7 @@ namespace TcpServer
     class Client
     {
         private static List<TcpClient> _clientList;
+        private const int _codeLength = 4;
         public Client(TcpClient client)
         {
             if (_clientList == null)
@@ -18,7 +19,34 @@ namespace TcpServer
             while (true)
             {
                 string message = WaitMessage(client);
-                SendToAll(message);
+                if (ShowRecieveOperation(message) == "msg:")
+                {
+                    SendToAll(message.Substring(_codeLength, message.Length - _codeLength));
+                }
+                else if(ShowRecieveOperation(message) == "ath:")
+                {
+                    string userName;
+                    string password;
+                    ParseAuthenticationMessage(message, out userName, out password);
+                    if (userName != "" && password != "")
+                    {
+                        DatabaseWorker dw = new DatabaseWorker();
+                        bool result = dw.CheckUserPassword(userName, password);
+                        if (result)
+                        {
+                            SendToOne("true", client);
+                        }
+                        else
+                        {
+                            SendToOne("false", client);
+                        }
+                    }
+                    else
+                    {
+                        SendToOne("false", client);
+                    }
+
+                }
             }
             //client.Close();                
         }
@@ -94,6 +122,39 @@ namespace TcpServer
                 _clientList.Remove(client);
             }
             removeList.Clear();
+        }
+        private void SendToOne(string message, TcpClient client)
+        {
+            if (IsConnected(client))
+            {
+                byte[] buffer = Encoding.ASCII.GetBytes(message);
+                client.GetStream().Write(buffer, 0, buffer.Length);
+            }
+            else
+            {
+                _clientList.Remove(client);
+            }
+        }
+        private string ShowRecieveOperation(string recieveMessage)
+        {
+            return recieveMessage.Substring(0, _codeLength);
+        }
+        private void ParseAuthenticationMessage(string recieveMessage, out string name, out string password)
+        {
+            name = "";
+            password = "";
+            string[] parseString = recieveMessage.Split(':');
+            for (int i = 0; i < parseString.Length; i++)
+            {
+                if (parseString[i] == "name")
+                {
+                    name = parseString[i + 1];
+                }
+                if (parseString[i] == "pswd")
+                {
+                    password = parseString[i + 1];
+                }
+            }
         }
     }
 }

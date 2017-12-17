@@ -27,7 +27,7 @@
                 <StackPanel>
                     <DataGrid x:Name="databaseInfo" Margin="10, 10, 100, 10" AutoGenerateColumns="True"></DataGrid>
                     <Button Name="ButtonShowSession" Content="Show sessions" Margin="0, 0, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top"></Button>
-                    <Button Name="ButtonShowMessages" Content="Show messions" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top"></Button>
+                    <Button Name="ButtonShowMessages" Content="Show messages" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top"></Button>
                     <Button Name="ButtonShowUsers" Content="Show users" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top"></Button>
                     <Button Name="ButtonShowAuthentication" Content="Authentications" Margin="0, 10, 0, 0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top"></Button>
                 </StackPanel>

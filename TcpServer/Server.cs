@@ -26,11 +26,18 @@ namespace TcpServer
             _tcpListener.Start();
             while (true)
             {
-                TcpClient client = _tcpListener.AcceptTcpClient();
-                //create thread
-                Thread thread = new Thread(new ParameterizedThreadStart(ClientThread));
-                //start thread
-                thread.Start(client);
+                try
+                {
+                    TcpClient client = _tcpListener.AcceptTcpClient();
+                    //create thread
+                    Thread thread = new Thread(new ParameterizedThreadStart(ClientThread));
+                    //start thread
+                    thread.Start(client);
+                }
+                catch
+                {
+                    continue;
+                }
             }
         }
         static void ClientThread(Object StateInfo)
