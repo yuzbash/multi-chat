@@ -101,33 +101,34 @@ namespace TcpServer
             //kill all threads and exit
             Environment.Exit(0);
         }
-
+        //on show sessions button
         private void ButtonShowSession_Click(object sender, RoutedEventArgs e)
         {
             DatabaseWorker dw = new DatabaseWorker();
             databaseInfo.ItemsSource = dw.GetSessions();
         }
-
+        //on show messages button
         private void ButtonShowMessages_Click(object sender, RoutedEventArgs e)
         {
             DatabaseWorker dw = new DatabaseWorker();
             databaseInfo.ItemsSource = dw.GetMessages();
         }
-
+        //on show users button click
         private void ButtonShowUsers_Click(object sender, RoutedEventArgs e)
         {
             DatabaseWorker dw = new DatabaseWorker();
             databaseInfo.ItemsSource = dw.GetUsers();
         }
-
+        //on show authentications button click
         private void ButtonShowAuthentication_Click(object sender, RoutedEventArgs e)
         {
             DatabaseWorker dw = new DatabaseWorker();
             databaseInfo.ItemsSource = dw.GetAuthentications();
         }
-
+        //on server off button click
         private void ButtonServerOff_Click(object sender, RoutedEventArgs e)
         {
+            //end server listening and change buttons enabled property
             EndServerWork();
             ButtonServerOff.IsEnabled = false;
             ButtonServerOn.IsEnabled = true;
