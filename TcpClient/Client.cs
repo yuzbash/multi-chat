@@ -60,10 +60,14 @@ namespace MyTcpClient
         }
         public void SendMessage(string message)
         {
-            byte[] buffer = Encoding.ASCII.GetBytes(_userName + ":" + message);
+            byte[] buffer = Encoding.ASCII.GetBytes("msg:" +_userName + ":" + message);
             _client.GetStream().Write(buffer, 0, buffer.Length);
         }
-        
+        public void SendServiceMessage(string message)
+        {
+            byte[] buffer = Encoding.ASCII.GetBytes(message);
+            _client.GetStream().Write(buffer, 0, buffer.Length);
+        }
         public string RecieveMessage()
         {
             byte[] bytes = new byte[_client.ReceiveBufferSize];

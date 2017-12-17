@@ -54,26 +54,33 @@ namespace MyTcpClient
                 LabelLoginResult.Content = "Error with creating client";
                 return;
             }
-            
-            if (client.Connect()) // and can login in future
+            try
             {
-                client.SendMessage("ath:name:" + userName + ":" + "pswd:" + password);
-                string answer = client.RecieveMessage();
-                if (answer == "true")
+                if (client.Connect()) // and can login in future
                 {
-                    MainWindow window = new MainWindow(client);
-                    window.Show();
-                    this.Close();
+                    client.SendServiceMessage("ath:name:" + userName + ":" + "pswd:" + password);
+                    string answer = client.RecieveMessage();
+                    if (answer == "true")
+                    {
+                        MainWindow window = new MainWindow(client);
+                        window.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        client.Close();
+                        LabelLoginResult.Content = "Error with authentication";
+                    }
                 }
                 else
                 {
                     client.Close();
+                    LabelLoginResult.Content = "Error with connection";
                 }
             }
-            else
+            catch
             {
-                client.Close();
-                LabelLoginResult.Content = "Error with connection";                
+                LabelLoginResult.Content = "Error with parametres";
             }
         }
     }
