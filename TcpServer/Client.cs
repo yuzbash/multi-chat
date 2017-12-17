@@ -52,8 +52,27 @@ namespace TcpServer
                     }
 
                 }
-            }
-            //client.Close();                
+                else if(ShowRecieveOperation(message) == "reg:")
+                {
+                    string userName;
+                    string password;
+                    string userSurname;
+                    string userPassportName;
+                    string userEmail;
+                    string userCity;
+                    ParseRegistrationString(message,out userName,out password, out userSurname,
+                                                out userPassportName,out userEmail,out userCity);
+                    if (dw.CheckUser(userName))
+                    {
+                        SendToOne("false", client);
+                    }
+                    else
+                    {
+                        SendToOne("true", client);
+                        dw.AddUser(userName, password, userSurname, userPassportName, userEmail, userCity);
+                    }
+                }
+            }               
         }
 
         //check if TcpClient is connected now
@@ -170,6 +189,34 @@ namespace TcpServer
             for (int i = 2; i < parseString.Length; i++)
             {
                 text += parseString[i];
+            }
+        }
+        private void ParseRegistrationString(string recieveMessage,out string userName,
+                                            out string password, out string userSurname,
+                                            out string userPasportName, out string userEmail,
+                                            out string userCity)
+        {
+            userName = "";
+            password = "";
+            userSurname = "";
+            userPasportName = "";
+            userEmail = "";
+            userCity = "";
+            string[] parseArray = recieveMessage.Split(':');
+            for (int i = 0; i < parseArray.Length; i++)
+            {
+                if (parseArray[i] == "user" && userName == "")
+                    userName = parseArray[i + 1];
+                if (parseArray[i] == "pswd" && password == "")
+                    password = parseArray[i + 1];
+                if (parseArray[i] == "srnm" && userSurname == "")
+                    userSurname = parseArray[i + 1];
+                if (parseArray[i] == "pasp" && userPasportName == "")
+                    userPasportName = parseArray[i + 1];
+                if (parseArray[i] == "emal" && userEmail == "")
+                    userEmail = parseArray[i + 1];
+                if (parseArray[i] == "city" && userCity == "")
+                    userCity = parseArray[i + 1];
             }
         }
     }
