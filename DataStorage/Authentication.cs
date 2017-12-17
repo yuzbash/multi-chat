@@ -10,7 +10,7 @@ namespace DataStorage
 {
     public class Authentication
     {
-        //primary ley
+        //primary key
         [Key]
         public int AuthenticationID { get; set; }
         //session id

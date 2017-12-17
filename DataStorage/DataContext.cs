@@ -8,6 +8,8 @@ using System.Data.Entity.Migrations;
 
 namespace DataStorage
 {
+    //class context for our database
+    //consist of 4 tables
     public class DataContext : DbContext
     {
         public DataContext():base("DBConnection")
@@ -19,6 +21,7 @@ namespace DataStorage
         public DbSet<ServerSession> ServerSessions { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Authentication> Authentications { get; set; }
+        //initializing
         public void InitializeUsers()
         {
             Users.AddOrUpdate(new User {
